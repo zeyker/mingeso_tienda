@@ -1,23 +1,23 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <link rel="stylesheet" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
-        <link rel="stylesheet" charset="UTF-8" href="css/style.css" />
-        <title>Mingeso PEP</title>
-    </h:head>
-    <h:body>               
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+  <body>
+ 
+    <ui:composition template="/plantilla.xhtml">
         
-        <div class="container col-md-6">
-            
-            <h1 class="page-title">Publicar un producto</h1>
-                                 
-        
-            <f:view>
+        <ui:define name="paginatitulo">Publicar producto</ui:define>
+       <ui:define name="paginacabecera">Publica un nuevo producto</ui:define> 
+       <ui:define name="contenido">
+           
+           
+           <f:view>
                 <h:form>
-                    
                     
                     <div class="form-group row">
                         <h:outputLabel value="Nombre Producto" class="col-sm-2 col-form-label"/>
@@ -55,6 +55,15 @@
                     </div>
                     
                     <div class="form-group row">
+                        <h:outputLabel value="Foto" class="col-sm-2 col-form-label"/>
+                        <div class="col-sm-10">
+                            <h:inputText value="#{productoView.producto.imagenUrl}" class="form-control"/>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="form-group row">
                         <h:outputLabel value="Numero telefono" class="col-sm-2 col-form-label"/>
                         <div class="col-sm-10">
                             <h:inputText value="#{productoView.producto.numeroTelefono}" class="form-control"/>
@@ -62,14 +71,34 @@
                     </div>
                     
                   
-                    <h:commandButton action="#{productoView.postProducto()}" value="Publicar producto" class="btn btn-primary"/>
+                    <h:commandButton action="#{productoView.postProducto()}" value="Publicar producto" class="btn btn-primary">
+                        <f:ajax execute="@form"/>
+                    </h:commandButton>           
+                    
                 </h:form>
-            </f:view>
-            
+            </f:view>                
+           
+           
+        <h:panelGroup id="listaProductos">
+            <ul>
+                <ui:repeat value="#{productoView.list()}" var="producto">
+                    <div>
+                        <h3>#{producto.nombre}</h3>
+                        <h:outputText value="#{producto.descripcion}" rendered="#{producto.descripcion.length() != 0}"></h:outputText>
+                        <i><h:outputText value="Sin descripción" rendered="#{producto.descripcion.length() == 0}"></h:outputText></i>
+                        <p><a href="javascript:;">Ver información</a></p>
+                    </div>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+                      
+       </ui:define>
+         
+    </ui:composition>
 
-        
-        </div>
-
-    </h:body>
+  </body>
 </html>
+
+
+
 

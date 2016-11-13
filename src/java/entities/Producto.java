@@ -31,7 +31,9 @@ public class Producto implements Serializable {
     
     @Size(max=1000)
     private String descripcion;
-    
+        
+    private String imagenUrl;   
+   
     @NotNull
     private Integer precio;    
     
@@ -61,6 +63,14 @@ public class Producto implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+     public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
 
     public String getDescripcion() {
         return descripcion;
@@ -69,6 +79,8 @@ public class Producto implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+
 
     public Integer getPrecio() {
         return precio;

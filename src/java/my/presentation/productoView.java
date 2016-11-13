@@ -7,6 +7,8 @@ package my.presentation;
 
 import boundary.ProductoFacade;
 import entities.Producto;
+import java.util.Collections;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -42,6 +44,12 @@ public class productoView {
     public String postProducto(){
         productoFacade.create(producto);
         return "productoagregado";
+    }
+    
+    public List<Producto> list(){
+        List<Producto> resultado = productoFacade.findAll();
+        Collections.reverse(resultado);
+        return resultado;
     }
     
 }
