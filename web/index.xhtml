@@ -76,21 +76,36 @@
                     </h:commandButton>           
                     
                 </h:form>
-            </f:view>                
+            </f:view>           
            
            
-        <h:panelGroup id="listaProductos">
-            <ul>
-                <ui:repeat value="#{productoView.list()}" var="producto">
-                    <div>
-                        <h3>#{producto.nombre}</h3>
-                        <h:outputText value="#{producto.descripcion}" rendered="#{producto.descripcion.length() != 0}"></h:outputText>
-                        <i><h:outputText value="Sin descripción" rendered="#{producto.descripcion.length() == 0}"></h:outputText></i>
-                        <p><a href="javascript:;">Ver información</a></p>
-                    </div>
-                </ui:repeat>
-            </ul>
-        </h:panelGroup>
+           <hr/>
+   
+        <div class="container">           
+            <h:panelGroup id="listaProductos">   
+                <ui:repeat value="#{productoView.list()}" var="producto">              
+                    
+                    <div class = "col-sm-6 col-md-3">
+                        <div class = "thumbnail">
+                            <h:graphicImage url="#{producto.imagenUrl}" rendered="#{producto.imagenUrl.length() != 0}"/>
+                            <h:graphicImage url="resources/images/desconocido.png" rendered="#{producto.imagenUrl.length() == 0}"/>
+
+                        </div>      
+                        <div class = "caption">
+                           <h3>#{producto.nombre}</h3>
+                           <p>#{producto.descripcion}</p>         
+                           <p>
+                              <a href = "#" class = "btn btn-primary" role = "button">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                                 Comprar
+                              </a>             
+                           </p>         
+                        </div>
+                    </div>                         
+                        
+                </ui:repeat>               
+            </h:panelGroup>
+        </div>
                       
        </ui:define>
          
