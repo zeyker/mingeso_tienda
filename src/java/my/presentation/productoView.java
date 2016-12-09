@@ -29,7 +29,7 @@ public class productoView {
     /**
      * Creates a new instance of productoView
      */
-    /**prueba jenkins*/
+    /**prueba jenkins 2*/
     public productoView() {
         producto = new Producto();
     }
